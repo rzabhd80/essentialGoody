@@ -7,7 +7,7 @@ import { queryHandlers } from "./query/handler";
 
 @Module({
   imports: [CqrsModule],
-  providers: [UsersService, ...commandHandlers, ...queryHandlers],
+  providers: [...commandHandlers, ...queryHandlers],
   controllers: [UsersController],
 })
 export class UsersModule {}
