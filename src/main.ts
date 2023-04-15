@@ -11,9 +11,8 @@ async function bootstrap() {
   await app.listen(3000);
   const config = new DocumentBuilder()
     .setTitle("Code Challenge")
-    .setDescription("The cats API description")
+    .setDescription("Simple Web API ")
     .setVersion("1.0")
-    .addTag("cats")
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("api", app, document);
