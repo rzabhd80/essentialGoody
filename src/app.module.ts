@@ -6,6 +6,8 @@ import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import * as process from "process";
+import { entities } from "../libs/entities";
+import { migrations } from "../libs/migrations";
 
 @Module({
   imports: [
@@ -23,8 +25,8 @@ import * as process from "process";
           username: config.get<string>("POSTGRES_USER"),
           password: config.get<string>("POSTGRES_PASSWORD"),
           database: config.get<string>("POSTGRES_DATABASE"),
-          migrations: [],
-          entities: [],
+          entities: entities,
+          migrations: migrations,
         };
       },
     }),
