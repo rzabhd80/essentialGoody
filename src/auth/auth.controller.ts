@@ -3,6 +3,8 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { SignInUserCommand } from "./commands/impl/sign-in-user.command";
 import { SignInUserRequestDto } from "./dtos-swagger/sign-in-user-request.dto";
+import { SignUpUserRequestDto } from "./dtos-swagger";
+import { SignUpUserCommand } from "./commands/impl/sign-up-user.command";
 
 @Controller("auth")
 @ApiTags("auth")
@@ -16,11 +18,13 @@ export class AuthController {
   async signInUser(
     @Body() signInUserRequestDto: SignInUserRequestDto,
   ) {
-    return this.commandBus.execute<SignInUserCommand>(new SignInUserCommand(signInUserRequestDto));
+    return this.commandBus.execute(new SignInUserCommand(signInUserRequestDto));
   }
 
   @Post("/sign-up")
   @ApiOperation({ description: "register user" })
-  async signUp(){}
+  async signUp(@Body() signUpUserRequestDtop: SignUpUserRequestDto) {
+    return this.commandBus.execute(new SignUpUserCommand(signUpUserRequestDtop));
+  }
 
 }

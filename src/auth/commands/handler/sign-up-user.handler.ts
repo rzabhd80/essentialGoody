@@ -6,16 +6,18 @@ import { Repository } from "typeorm";
 import { SignUpUserCommand } from "../impl/sign-up-user.command";
 import { CustomError, USER_WITH_GIVEN_EMAIL_EXISTS } from "../../../../http-exception";
 import { generateHashPassword } from "../../../../helpers/password";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 @CommandHandler(SignUpUserCommand)
 export class SignUpUserHandler implements ICommandHandler<SignUpUserCommand> {
-  constructor(@InjectRepository(User) public readonly userRepo: Repository<User>) {
+  constructor(@InjectRepository(User) public readonly userRepo) {
   }
 
   async execute(command: SignUpUserCommand) {
     const { signUpUserDto } = command;
     const { firstName, lastName, email, password } = signUpUserDto;
-    const userOnDB = this.userRepo.findOne({ where: { email: email } });
+    const userOnDB = await this.userRepo.findOne({ where: { email: email } });
     if (userOnDB) {
       throw new CustomError(USER_WITH_GIVEN_EMAIL_EXISTS);
     }

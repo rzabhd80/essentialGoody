@@ -8,7 +8,8 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-@Entity()
+@Index("user_pkey", ["id"], { unique: true })
+@Entity("user", { schema: "public" })
 export class User extends BaseEntity {
 
   @PrimaryGeneratedColumn("uuid", { name: "id" })

@@ -11,7 +11,6 @@ export class UsersController {
   }
 
   @Get()
-  @UseGuards(AuthGuard)
   @ApiOperation({ description: "get list of users" })
   @ApiBearerAuth()
   async getUsers() {

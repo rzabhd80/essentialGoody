@@ -7,6 +7,8 @@ import { UsersModule } from "./users/users.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import * as process from "process";
 import { entities } from "libs/entities";
+import { User } from "../libs/entities/user.entity";
+import { JwtModule } from "@nestjs/jwt";
 
 @Module({
   imports: [
@@ -25,7 +27,18 @@ import { entities } from "libs/entities";
           username: config.get<string>("POSTGRES_USER"),
           password: config.get<string>("POSTGRES_PASSWORD"),
           database: config.get<string>("POSTGRES_DATABASE"),
-          entities: ["dist/**/*.entity{.ts,.js}"],
+          entities: [User],
+        };
+      },
+    }),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        return {
+          global: true,
+          secret: config.get<string>("JWT_SECRET_KEY"),
+          signOptions: { expiresIn: "3600s" },
         };
       },
     }),

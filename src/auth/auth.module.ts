@@ -7,25 +7,18 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { UsersModule } from "../users/users.module";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule, ConfigService } from "@nestjs/config";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { entities } from "../../libs/entities";
 
 @Module({
   imports: [
     CqrsModule,
     UsersModule,
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => {
-        return {
-          global: true,
-          secret: config.get<string>("JWT_SECRET_KEY"),
-          signOptions: { expiresIn: "3600s" },
-        };
-      },
-    }),
+    TypeOrmModule.forFeature(entities),
+    JwtModule,
   ],
   controllers: [AuthController],
-  providers: [...commandHandlers, ...queryHandlers],
+  providers: [...commandHandlers, ...queryHandlers, AuthService],
 })
 export class AuthModule {
 }

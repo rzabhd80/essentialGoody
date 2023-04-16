@@ -6,10 +6,12 @@ import { Repository } from "typeorm";
 import { CustomError, INCORRECT_PASSWORD, USER_NOT_FOUND } from "../../../../http-exception";
 import { verifyPassword } from "../../../../helpers/password";
 import { JwtService } from "@nestjs/jwt";
+import { Injectable } from "@nestjs/common";
 
 @CommandHandler(SignInUserCommand)
+@Injectable()
 export class SignInUserHandler implements ICommandHandler<SignInUserCommand> {
-  constructor(@InjectRepository(User) public readonly userRepo: Repository<User>,
+  constructor(@InjectRepository(User) public readonly userRepo,
               private readonly jwtService: JwtService) {
   }
 

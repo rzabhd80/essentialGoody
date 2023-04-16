@@ -1,7 +1,7 @@
 import { SignInUserDto, SignUpUserDto } from "../dtos";
 import { ApiProperty } from "@nestjs/swagger";
 
-export class SignInUserRequestDto extends SignUpUserDto {
+export class SignUpUserRequestDto extends SignUpUserDto {
   @ApiProperty()
   email: string;
   @ApiProperty()
