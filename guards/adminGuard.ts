@@ -5,10 +5,9 @@ import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  @Inject(ConfigService)
-  config: ConfigService;
-
-  constructor(private jwtService: JwtService) {
+  constructor(
+    public readonly config: ConfigService,
+    public readonly jwtService: JwtService) {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {

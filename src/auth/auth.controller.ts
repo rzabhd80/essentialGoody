@@ -19,4 +19,8 @@ export class AuthController {
     return this.commandBus.execute<SignInUserCommand>(new SignInUserCommand(signInUserRequestDto));
   }
 
+  @Post("/sign-up")
+  @ApiOperation({ description: "register user" })
+  async signUp(){}
+
 }

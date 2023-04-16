@@ -23,6 +23,9 @@ export class User extends BaseEntity {
   @Column("varchar", { name: "lastName", nullable: false, length: 255 })
   lastName: string;
 
+  @Column("varchar", { name: "password", nullable: false })
+  password: string;
+
   @CreateDateColumn({
     type: "timestamptz",
     default: () => "CURRENT_TIMESTAMP(6)",
