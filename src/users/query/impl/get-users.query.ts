@@ -1,4 +1,6 @@
+import { GetUsersDto } from "../../dtos/get-users.dto";
+
 export class GetUsersQuery {
-  constructor() {
+  constructor(public readonly getUsersDto : GetUsersDto) {
   }
 }

@@ -11,8 +11,7 @@ import { Injectable } from "@nestjs/common";
 @CommandHandler(SignInUserCommand)
 @Injectable()
 export class SignInUserHandler implements ICommandHandler<SignInUserCommand> {
-  constructor(@InjectRepository(User) public readonly userRepo,
-              private readonly jwtService: JwtService) {
+  constructor(@InjectRepository(User) public readonly userRepo, private readonly jwtService: JwtService) {
   }
 
   async execute(command: SignInUserCommand) {

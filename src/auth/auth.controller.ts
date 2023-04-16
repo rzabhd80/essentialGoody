@@ -14,7 +14,6 @@ export class AuthController {
 
   @Post("/sign-in")
   @ApiOperation({ description: "sign in" })
-  @ApiBearerAuth()
   async signInUser(
     @Body() signInUserRequestDto: SignInUserRequestDto,
   ) {
