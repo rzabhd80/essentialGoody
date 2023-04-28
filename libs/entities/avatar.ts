@@ -1,4 +1,3 @@
-import { profile } from "console";
 import {
   BaseEntity,
   Column,
@@ -6,32 +5,22 @@ import {
   DeleteDateColumn,
   Entity,
   Index,
+  JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Avatar } from "./avatar";
+import { User } from "./user.entity";
 
-@Index("user_pkey", ["id"], { unique: true })
-@Entity("user", { schema: "public" })
-export class User extends BaseEntity {
+@Index("avatar_pkey", ["id"], { unique: true })
+@Entity("avatar", { schema: "public" })
+export class Avatar extends BaseEntity {
   @PrimaryGeneratedColumn("uuid", { name: "id" })
   id: string;
 
-  @Column("varchar", { name: "email", nullable: false, length: 255 })
-  email: string;
-
-  @Column("varchar", { name: "firstName", nullable: false, length: 255 })
-  firstName: string;
-
-  @Column("varchar", { name: "lastName", nullable: false, length: 255 })
-  lastName: string;
-
-  @Column("varchar", { name: "password", nullable: false })
-  password: string;
-
-  @OneToOne(() => Avatar, (avatar) => avatar.user)
-  avatar?: Avatar;
+  @Column({ type: "uuid", name: "user_id", nullable: true })
+  userId?: string;
 
   @CreateDateColumn({
     type: "timestamptz",
@@ -54,4 +43,8 @@ export class User extends BaseEntity {
     name: "deleted_at",
   })
   public deletedAt: Date | null;
+
+  @OneToOne(() => User, (user) => user.avatar)
+  @JoinColumn({ name: "user_id", referencedColumnName: "id" })
+  user?: User;
 }
