@@ -3,7 +3,9 @@ import {
   ClassSerializerInterceptor,
   Controller,
   Get,
-  Param, ParseUUIDPipe,
+  Param,
+  ParseUUIDPipe,
+  Post,
   Query,
   UseGuards,
   UseInterceptors,
@@ -12,34 +14,35 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { AuthGuard } from "../../guards/adminGuard";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { GetUsersQuery } from "./query/impl/get-users.query";
-import { GetUsersRequestDto } from "./dtos-swagger";
+import { CreateUserRequest, GetUsersRequestDto } from "./dtos-swagger";
 import { GetUserByIdQuery } from "./query/impl/get-user-by-id.query";
-import { SayHelloRequestDto } from "./dtos-swagger/say-hello-request.dto";
-import { SayHelloQuery } from "./query/impl/say-hello.query";
+import { CreateUserCommand } from "./command/impl/create-user.imple";
 
 @Controller("users")
 @ApiTags("users")
 export class UsersController {
-  constructor(private queryBus: QueryBus, private commandBus: CommandBus) {
-  }
-
-  @Get("/hello")
-  @ApiOperation({ description: "Get a simple hello" })
-  async sayHello(@Query() sayHello: SayHelloRequestDto) {
-    return this.queryBus.execute(new SayHelloQuery(sayHello));
-  }
+  constructor(private queryBus: QueryBus, private commandBus: CommandBus) {}
 
   @Get("/all")
   @ApiOperation({ description: "get list of users" })
   async getUsers(@Query() getUsersRequest: GetUsersRequestDto) {
-    return this.queryBus.execute<GetUsersQuery>(new GetUsersQuery(getUsersRequest));
+    return this.queryBus.execute<GetUsersQuery>(
+      new GetUsersQuery(getUsersRequest)
+    );
+  }
+
+  @Post()
+  @ApiOperation({ description: "create a user" })
+  async createUser(@Body() body: CreateUserRequest) {
+    return this.commandBus.execute(new CreateUserCommand(body));
   }
 
   @Get("/:id")
   @ApiOperation({ description: "get user by id" })
   async getUserById(
     @Param("id", new ParseUUIDPipe({ version: "4" }))
-      userId: string) {
+    userId: string
+  ) {
     return this.queryBus.execute(new GetUserByIdQuery(userId));
   }
 }

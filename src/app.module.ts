@@ -9,6 +9,8 @@ import * as process from "process";
 import { entities } from "libs/entities";
 import { User } from "../libs/entities/user.entity";
 import { JwtModule } from "@nestjs/jwt";
+import { EventsHandlers } from "./events/handler";
+import { Avatar } from "libs/entities/avatar.entity";
 
 @Module({
   imports: [
@@ -27,7 +29,7 @@ import { JwtModule } from "@nestjs/jwt";
           username: config.get<string>("POSTGRES_USER"),
           password: config.get<string>("POSTGRES_PASSWORD"),
           database: config.get<string>("POSTGRES_DATABASE"),
-          entities: [User],
+          entities: [User, Avatar],
         };
       },
     }),
@@ -44,7 +46,6 @@ import { JwtModule } from "@nestjs/jwt";
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ...EventsHandlers],
 })
-export class AppModule {
-}
+export class AppModule {}

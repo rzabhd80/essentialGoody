@@ -4,7 +4,7 @@ import { promisify } from "util";
 const scrypt = promisify(_scrypt);
 
 export const generateHashPassword = async (
-  password: string,
+  password: string
 ): Promise<string> => {
   // generate the salt
   const salt = randomBytes(8).toString("hex");

@@ -8,11 +8,17 @@ import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { entities } from "../../libs/entities";
+import { HttpModule } from "@nestjs/axios";
 
 @Module({
-  imports: [CqrsModule, JwtModule, ConfigModule, TypeOrmModule.forFeature(entities)],
+  imports: [
+    CqrsModule,
+    JwtModule,
+    HttpModule,
+    ConfigModule,
+    TypeOrmModule.forFeature(entities),
+  ],
   providers: [...commandHandlers, ...queryHandlers],
   controllers: [UsersController],
 })
-export class UsersModule {
-}
+export class UsersModule {}

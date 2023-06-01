@@ -10,7 +10,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Avatar } from "./avatar";
+import { Avatar } from "./avatar.entity";
 
 @Index("user_pkey", ["id"], { unique: true })
 @Entity("user", { schema: "public" })

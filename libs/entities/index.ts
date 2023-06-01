@@ -1,3 +1,3 @@
 import { User } from "./user.entity";
-
-export const entities = [User];
+import { Avatar } from "./avatar.entity";
+export const entities = [User, Avatar];

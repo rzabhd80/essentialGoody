@@ -9,8 +9,9 @@ import { paginate } from "../../../../helpers/paginate";
 @Injectable()
 @QueryHandler(GetUsersQuery)
 export class GetUsersHandler implements IQueryHandler<GetUsersQuery> {
-  constructor(@InjectRepository(User) public readonly userRepo: Repository<User>) {
-  }
+  constructor(
+    @InjectRepository(User) public readonly userRepo: Repository<User>
+  ) {}
 
   async execute(query: GetUsersQuery) {
     const { getUsersDto } = query;

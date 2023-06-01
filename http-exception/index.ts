@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus } from "@nestjs/common";
 
 export interface ICustomError {
-  status: number,
-  description: string
+  status: number;
+  description: string;
 }
 
 export class CustomError extends HttpException {
@@ -19,6 +19,14 @@ export const USER_NOT_FOUND: ICustomError = {
   status: HttpStatus.NOT_FOUND,
   description: "user not found",
 };
+
+export const USER_AVATAR_NOT_FOUND: ICustomError = {
+  status: HttpStatus.NOT_FOUND,
+  description: "user avatar not found",
+};
+
+
+
 export const INCORRECT_PASSWORD: ICustomError = {
   status: HttpStatus.BAD_REQUEST,
   description: "given password is wrong",

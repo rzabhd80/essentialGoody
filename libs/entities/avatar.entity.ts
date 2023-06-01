@@ -22,6 +22,12 @@ export class Avatar extends BaseEntity {
   @Column({ type: "uuid", name: "user_id", nullable: true })
   userId?: string;
 
+  @Column({ type: "varchar", name: "link", nullable: false })
+  link: string;
+
+  @Column({ type: "varchar", name: "hash", nullable: true })
+  hash: string;
+
   @CreateDateColumn({
     type: "timestamptz",
     default: () => "CURRENT_TIMESTAMP(6)",

@@ -1,3 +1,3 @@
-export class GetUserByIdQuery {
+export class GetUserAvatarByIdQuery {
   constructor(public readonly userId: string) {}
 }

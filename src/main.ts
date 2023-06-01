@@ -1,6 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
+import { NestMicroserviceOptions } from "@nestjs/common/interfaces/microservices/nest-microservice-options.interface";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
@@ -8,7 +9,6 @@ async function bootstrap() {
   const port = process.env.API_PORT || 4000;
   const globalPrefix = "api";
   app.setGlobalPrefix(globalPrefix);
-
 
   const config = new DocumentBuilder()
     .setTitle("Code Challenge")
