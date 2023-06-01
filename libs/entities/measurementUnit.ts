@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Avatar } from "./avatar.entity";
 import { BaseModel } from "helpers/baseModel";
 import { EssentialGood } from "./essentialGood.entity";
 

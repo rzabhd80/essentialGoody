@@ -4,7 +4,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  Index, JoinColumn, ManyToOne,
+  Index, JoinColumn, ManyToMany, ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -12,6 +12,8 @@ import {
 import { Avatar } from "./avatar.entity";
 import { BaseModel } from "helpers/baseModel";
 import { MeasurementUnit } from "./measurementUnit";
+import { Category } from "./category";
+import { JoinTable } from "typeorm/browser";
 
 @Index("essential_good_pkey", ["id"], { unique: true })
 @Entity("essential_good", { schema: "public" })
@@ -35,5 +37,10 @@ export class EssentialGood extends BaseModel {
     (measurementUnit) => measurementUnit.essentialGoods)
   @JoinColumn({ name: "measurement_unit_id", referencedColumnName: "id" })
   measurementUnit: MeasurementUnit;
+
+  @ManyToMany(() => Category,
+    (category) => category.essentialGoods)
+  @JoinTable()
+  categories: Category[];
 
 }
