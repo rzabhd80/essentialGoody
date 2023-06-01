@@ -16,7 +16,7 @@ import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { GetCategoriesQuery } from "./query/impl/get-categories.query";
 import { CreateUserRequest, GetUsersRequestDto } from "./dtos-swagger";
 import { GetCategoryByIdQuery } from "./query/impl/get-category-by-id.query";
-import { CreateUserCommand } from "./command/impl/create-user.imple";
+import { CreateUserCommand } from "./command/impl/create-category.imple";
 
 @Controller("categories")
 @ApiTags("categories")

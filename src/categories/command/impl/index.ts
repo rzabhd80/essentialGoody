@@ -1,4 +1,3 @@
-import { CreateUserCommand } from "./create-user.imple";
-import { CreateUserProfileCommand } from "./create-user-profile";
+import { CreateUserCommand } from "./create-category.imple";
 
-export const commands = [CreateUserCommand, CreateUserProfileCommand];
+export const commands = [CreateUserCommand];
