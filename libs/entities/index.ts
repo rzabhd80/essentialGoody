@@ -1,3 +1,7 @@
 import { User } from "./user.entity";
 import { Avatar } from "./avatar.entity";
-export const entities = [User, Avatar];
+import { EssentialGood } from "./essentialGood.entity";
+import { Category } from "./category";
+import { MeasurementUnit } from "./measurementUnit";
+
+export const entities = [User, Avatar, EssentialGood, Category, MeasurementUnit];

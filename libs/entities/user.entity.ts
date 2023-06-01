@@ -11,10 +11,11 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Avatar } from "./avatar.entity";
+import { BaseModel } from "helpers/baseModel";
 
 @Index("user_pkey", ["id"], { unique: true })
 @Entity("user", { schema: "public" })
-export class User extends BaseEntity {
+export class User extends BaseModel {
   @PrimaryGeneratedColumn("uuid", { name: "id" })
   id: string;
 
@@ -32,26 +33,4 @@ export class User extends BaseEntity {
 
   @OneToOne(() => Avatar, (avatar) => avatar.user)
   avatar?: Avatar;
-
-  @CreateDateColumn({
-    type: "timestamptz",
-    default: () => "CURRENT_TIMESTAMP(6)",
-    name: "created_at",
-  })
-  public createdAt: Date;
-
-  @UpdateDateColumn({
-    type: "timestamptz",
-    default: () => "CURRENT_TIMESTAMP(6)",
-    onUpdate: "CURRENT_TIMESTAMP(6)",
-    name: "updated_at",
-  })
-  public updatedAt: Date;
-
-  @DeleteDateColumn({
-    type: "timestamptz",
-    default: () => `null`,
-    name: "deleted_at",
-  })
-  public deletedAt: Date | null;
 }
