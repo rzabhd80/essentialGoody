@@ -14,9 +14,9 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { AuthGuard } from "../../guards/adminGuard";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { GetCategoriesQuery } from "./query/impl/get-categories.query";
-import { CreateCategoryRequestDto, CreateUserRequest, GetUsersRequestDto } from "./dtos-swagger";
+import { CreateCategoryRequestDto} from "./dtos-swagger";
 import { GetCategoryByIdQuery } from "./query/impl/get-category-by-id.query";
-import { CreateCategoryCommand, CreateUserCommand } from "./command/impl/create-category.imple";
+import { CreateCategoryCommand} from "./command/impl/create-category.imple";
 import { UpdateCategoryRequestDto } from "./dtos-swagger/update-category-request.dto";
 import { UpdateCategoryCommand } from "./command/impl/update-category.imple";
 import { DeleteCategoryCommand } from "./command/impl/delete-category.imple";
@@ -29,7 +29,7 @@ export class CategoryController {
 
   @Get("/")
   @ApiOperation({ description: "get list of categories" })
-  async getUsers(@Query() getUsersRequest: GetUsersRequestDto) {
+  async getUsers(@Query() getUsersRequest: GetCategoriesQuery) {
     return this.queryBus.execute<GetCategoriesQuery>(
       new GetCategoriesQuery(getUsersRequest),
     );
