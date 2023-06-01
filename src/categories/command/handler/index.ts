@@ -1,3 +1,5 @@
-import { CreateCategoryHandler } from "./create-category-handler";
-import { CreateUserProfileHandler } from "./create-user-profile.handler";
-export const commandsHandlers = [CreateCategoryHandler, CreateUserProfileHandler];
+import { CreateCategoryHandler } from "./create-category.handler";
+import { UpdateCategoryHandler } from "./update-category.handler";
+import { DeleteCategoryHandler } from "./delete-category.handler";
+
+export const commandsHandlers = [CreateCategoryHandler, UpdateCategoryHandler, DeleteCategoryHandler];
