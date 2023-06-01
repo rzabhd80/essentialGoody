@@ -1,3 +1,3 @@
 export class GetCategoryByIdQuery {
-  constructor(public readonly userId: string) {}
+  constructor(public readonly categoryId: string) {}
 }

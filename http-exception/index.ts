@@ -20,11 +20,15 @@ export const USER_NOT_FOUND: ICustomError = {
   description: "user not found",
 };
 
+export const CATEGORY_NOT_FOUND: ICustomError = {
+  status: HttpStatus.NOT_FOUND,
+  description: "category with given id not found",
+};
+
 export const USER_AVATAR_NOT_FOUND: ICustomError = {
   status: HttpStatus.NOT_FOUND,
   description: "user avatar not found",
 };
-
 
 
 export const INCORRECT_PASSWORD: ICustomError = {

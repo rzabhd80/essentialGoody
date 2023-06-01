@@ -4,22 +4,24 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "../../../../libs/entities/user.entity";
 import { Repository } from "typeorm";
 import { GetCategoriesQuery } from "../impl/get-categories.query";
-import { CustomError, USER_NOT_FOUND } from "../../../../http-exception";
+import { CATEGORY_NOT_FOUND, CustomError, USER_NOT_FOUND } from "../../../../http-exception";
 import { firstValueFrom } from "rxjs";
 import { Inject } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
+import { Category } from "../../../../libs/entities/category";
 
 @QueryHandler(GetCategoryByIdQuery)
-export class GetUserByIdHandler implements IQueryHandler<GetCategoryByIdQuery> {
+export class GetCategoryByIdHandler implements IQueryHandler<GetCategoryByIdQuery> {
   constructor(
-    @InjectRepository(User) public readonly userRepo: Repository<User>,
-    public readonly httpService: HttpService
-  ) {}
+    @InjectRepository(Category) public readonly categoryRepo: Repository<Category>,
+  ) {
+  }
 
   async execute(query: GetCategoryByIdQuery) {
-    const { userId } = query;
-    const url = `https://reqres.in/api/users/${userId}`;
-    const { data } = await firstValueFrom(this.httpService.get<User>(url));
-    return data;
+    const { categoryId } = query;
+    const category = await this.categoryRepo.findOne({ where: { id: categoryId } });
+    if (!category) {
+      return new CustomError(CATEGORY_NOT_FOUND);
+    }
   }
 }

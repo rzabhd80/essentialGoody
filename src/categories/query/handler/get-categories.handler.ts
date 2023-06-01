@@ -8,15 +8,16 @@ import { paginate } from "../../../../helpers/paginate";
 
 @Injectable()
 @QueryHandler(GetCategoriesQuery)
-export class GetUsersHandler implements IQueryHandler<GetCategoriesQuery> {
+export class GetCategoriesHandler implements IQueryHandler<GetCategoriesQuery> {
   constructor(
-    @InjectRepository(User) public readonly userRepo: Repository<User>
-  ) {}
+    @InjectRepository(User) public readonly userRepo: Repository<User>,
+  ) {
+  }
 
   async execute(query: GetCategoriesQuery) {
-    const { getUsersDto } = query;
-    const { page, limit } = getUsersDto;
-    const queryBuilder = this.userRepo.createQueryBuilder("users");
+    const { getCategoriesDto } = query;
+    const { page, limit } = getCategoriesDto;
+    const queryBuilder = this.userRepo.createQueryBuilder("categories");
     return paginate<User>(queryBuilder, page, limit);
   }
 }

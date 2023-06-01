@@ -1,4 +1,4 @@
-import { GetUsersHandler } from "./get-users.handler";
-import { GetUserByIdHandler } from "./get-user-by-id.handler";
+import { GetCategoriesHandler } from "./get-categories.handler";
+import { GetCategoryByIdHandler } from "./get-category-by-id.handler";
 
-export const queryHandlers = [GetUsersHandler, GetUserByIdHandler];
+export const queryHandlers = [GetCategoriesHandler, GetCategoryByIdHandler];
