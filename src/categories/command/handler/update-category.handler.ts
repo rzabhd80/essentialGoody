@@ -11,7 +11,7 @@ import { UpdateCategoryCommand } from "../impl/update-category.imple";
 @CommandHandler(UpdateCategoryCommand)
 export class UpdateCategoryHandler implements ICommandHandler<UpdateCategoryCommand> {
   constructor(
-    @InjectRepository(Category) public readonly categoryRepo,
+    @InjectRepository(Category) public readonly categoryRepo: Repository<Category>,
     public readonly eventPublisher: EventPublisher,
   ) {
   }
@@ -27,7 +27,8 @@ export class UpdateCategoryHandler implements ICommandHandler<UpdateCategoryComm
     if (!category) {
       return new CustomError(CATEGORY_NOT_FOUND);
     }
-    category.update(name, parentCategoryId);
+    Object.assign(category, { name: name, parentCategoryId: parentCategoryId });
+    await category.save();
     return category;
   }
 }

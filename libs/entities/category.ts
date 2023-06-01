@@ -22,12 +22,12 @@ export class Category extends BaseModel {
   name: string;
 
   @Column({ name: "parent_category", type: "uuid", nullable: true })
-  parentCategoryId: number;
+  parentCategoryId: string;
 
   @OneToOne(() => Category, (category) =>
     category.parentCategory)
   @JoinColumn({ name: "parent_category_id", referencedColumnName: "id" })
-  parentCategory: number;
+  parentCategory: Category;
 
   @ManyToMany(() => EssentialGood, (essentialGood) => essentialGood.categories)
   @JoinTable()

@@ -11,12 +11,19 @@ import { User } from "../libs/entities/user.entity";
 import { JwtModule } from "@nestjs/jwt";
 import { EventsHandlers } from "./events/handler";
 import { Avatar } from "libs/entities/avatar.entity";
+import { EssentialGood } from "../libs/entities/essentialGood.entity";
+import { Category } from "../libs/entities/category";
+import { MeasurementUnit } from "../libs/entities/measurementUnit";
+import { MeasurementUnitsModule } from "./measurementUnits/measurementUnits.module";
+import { CategoriesModule } from "./categories/categories.module";
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     AuthModule,
     UsersModule,
+    MeasurementUnitsModule,
+    CategoriesModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -29,7 +36,7 @@ import { Avatar } from "libs/entities/avatar.entity";
           username: config.get<string>("POSTGRES_USER"),
           password: config.get<string>("POSTGRES_PASSWORD"),
           database: config.get<string>("POSTGRES_DATABASE"),
-          entities: [User, Avatar],
+          entities: [User, Avatar, EssentialGood, Category, MeasurementUnit],
         };
       },
     }),
@@ -48,4 +55,5 @@ import { Avatar } from "libs/entities/avatar.entity";
   controllers: [AppController],
   providers: [AppService, ...EventsHandlers],
 })
-export class AppModule {}
+export class AppModule {
+}

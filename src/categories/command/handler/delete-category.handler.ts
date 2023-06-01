@@ -12,7 +12,7 @@ import { DeleteCategoryCommand } from "../impl/delete-category.imple";
 @CommandHandler(DeleteCategoryCommand)
 export class DeleteCategoryHandler implements ICommandHandler<DeleteCategoryCommand> {
   constructor(
-    @InjectRepository(Category) public readonly categoryRepo,
+    @InjectRepository(Category) public readonly categoryRepo: Repository<Category>,
     public readonly eventPublisher: EventPublisher,
   ) {
   }
@@ -23,6 +23,8 @@ export class DeleteCategoryHandler implements ICommandHandler<DeleteCategoryComm
     if (!category) {
       return new CustomError(CATEGORY_NOT_FOUND);
     }
-    category.remove().save();
+
+    await category.softRemove();
+    return await category.save();
   }
 }

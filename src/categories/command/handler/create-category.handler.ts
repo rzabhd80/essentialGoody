@@ -10,7 +10,7 @@ import { CATEGORY_NOT_FOUND, CustomError } from "http-exception";
 @CommandHandler(CreateCategoryCommand)
 export class CreateCategoryHandler implements ICommandHandler<CreateCategoryCommand> {
   constructor(
-    @InjectRepository(Category) public readonly categoryRepo,
+    @InjectRepository(Category) public readonly categoryRepo: Repository<Category>,
     public readonly eventPublisher: EventPublisher,
   ) {
   }
@@ -22,10 +22,10 @@ export class CreateCategoryHandler implements ICommandHandler<CreateCategoryComm
     if (!parentCategory) {
       return new CustomError(CATEGORY_NOT_FOUND);
     }
-    const category = this.categoryRepo
+    const category = await this.categoryRepo
       .create({
-        name,
-        parentCategoryId,
+        name: name,
+        parentCategoryId: parentCategory.id,
       })
       .save();
     return category;
