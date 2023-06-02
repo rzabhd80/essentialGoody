@@ -6,12 +6,12 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { BaseModel } from "helpers/baseModel";
+import { BaseModel } from "libs/entities/baseModel";
 import { EssentialGood } from "./essentialGood.entity";
 
 @Index("measurement_unit_pkey", ["id"], { unique: true })
 @Entity("measurement_unit", { schema: "public" })
-export class MeasurementUnit extends BaseModel {
+export class MeasurementUnitEntity extends BaseModel {
   @Column("varchar", { name: "name", nullable: false, length: 255 })
   name: string;
 

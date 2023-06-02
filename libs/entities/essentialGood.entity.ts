@@ -10,10 +10,9 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Avatar } from "./avatar.entity";
-import { BaseModel } from "helpers/baseModel";
-import { MeasurementUnit } from "./measurementUnit";
-import { Category } from "./category";
-import { JoinTable } from "typeorm/browser";
+import { BaseModel } from "libs/entities/baseModel";
+import { MeasurementUnitEntity } from "./measurementUnit.entity";
+import { CategoryEntity } from "./category.entity";
 
 @Index("essential_good_pkey", ["id"], { unique: true })
 @Entity("essential_good", { schema: "public" })
@@ -33,14 +32,12 @@ export class EssentialGood extends BaseModel {
   @Column({ name: "measurement_unit_id", type: "uuid", nullable: false })
   measurementUnitId: number;
 
-  @ManyToOne(() => MeasurementUnit,
+  @ManyToOne(() => MeasurementUnitEntity,
     (measurementUnit) => measurementUnit.essentialGoods)
   @JoinColumn({ name: "measurement_unit_id", referencedColumnName: "id" })
-  measurementUnit: MeasurementUnit;
+  measurementUnit: MeasurementUnitEntity;
 
-  @ManyToMany(() => Category,
+  @ManyToMany(() => CategoryEntity,
     (category) => category.essentialGoods)
-  @JoinTable()
-  categories: Category[];
-
+  categories: CategoryEntity[];
 }

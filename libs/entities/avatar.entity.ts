@@ -12,11 +12,9 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { User } from "./user.entity";
-import { BaseModel } from "helpers/baseModel";
-
 @Index("avatar_pkey", ["id"], { unique: true })
 @Entity("avatar", { schema: "public" })
-export class Avatar extends BaseModel {
+export class Avatar extends BaseEntity {
   @Column({ type: "uuid", name: "user_id", nullable: true })
   userId?: string;
 

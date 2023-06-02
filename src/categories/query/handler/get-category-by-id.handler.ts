@@ -8,12 +8,12 @@ import { CATEGORY_NOT_FOUND, CustomError, USER_NOT_FOUND } from "../../../../htt
 import { firstValueFrom } from "rxjs";
 import { Inject } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
-import { Category } from "../../../../libs/entities/category";
+import { CategoryEntity } from "../../../../libs/entities/category.entity";
 
 @QueryHandler(GetCategoryByIdQuery)
 export class GetCategoryByIdHandler implements IQueryHandler<GetCategoryByIdQuery> {
   constructor(
-    @InjectRepository(Category) public readonly categoryRepo: Repository<Category>,
+    @InjectRepository(CategoryEntity) public readonly categoryRepo: Repository<CategoryEntity>,
   ) {
   }
 

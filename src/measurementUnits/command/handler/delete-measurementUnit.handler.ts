@@ -2,16 +2,16 @@ import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Inject, Injectable } from "@nestjs/common";
-import { Category } from "libs/entities/category";
+import { CategoryEntity } from "libs/entities/category.entity";
 import { CATEGORY_NOT_FOUND, CustomError } from "http-exception";
 import { DeleteMeasurementUnitCommand } from "../impl/delete-measurementUnit.imple";
-import { MeasurementUnit } from "../../../../libs/entities/measurementUnit";
+import { MeasurementUnitEntity } from "../../../../libs/entities/measurementUnit.entity";
 
 @Injectable()
 @CommandHandler(DeleteMeasurementUnitCommand)
 export class DeleteMeasurementUnitHandler implements ICommandHandler<DeleteMeasurementUnitCommand> {
   constructor(
-    @InjectRepository(MeasurementUnit) public readonly measurementUnitRepo: Repository<MeasurementUnit>,
+    @InjectRepository(MeasurementUnitEntity) public readonly measurementUnitRepo: Repository<MeasurementUnitEntity>,
     public readonly eventPublisher: EventPublisher,
   ) {
   }

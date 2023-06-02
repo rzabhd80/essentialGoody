@@ -1,11 +1,11 @@
 FROM node:16-alpine
 WORKDIR /app
 
-ADD package.json /app/package.json
+ADD package.json .
 
 RUN npm install --legacy-peer-deps
 
-ADD . /app
+ADD infra /app
 
 RUN npx nx build api
 
