@@ -11,7 +11,7 @@ import { HttpService } from "@nestjs/axios";
 import { CategoryEntity } from "../../../../libs/entities/category.entity";
 
 @QueryHandler(GetCategoryByIdQuery)
-export class GetCategoryByIdHandler implements IQueryHandler<GetCategoryByIdQuery> {
+export class GetEssentialGoodByIdHandler implements IQueryHandler<GetCategoryByIdQuery> {
   constructor(
     @InjectRepository(CategoryEntity) public readonly categoryRepo: Repository<CategoryEntity>,
   ) {

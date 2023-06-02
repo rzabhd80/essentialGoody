@@ -1,3 +1,3 @@
-export * from "./create-category.dto";
-export * from "./update-category.dto"
-export * from  "./get-categories.dto"
+export * from "./create-essentialGood.dto";
+export * from "./update-essentialGood.dto"
+export * from "./get-essentialGoods.dto"

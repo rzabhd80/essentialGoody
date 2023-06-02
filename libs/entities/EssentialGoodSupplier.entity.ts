@@ -19,9 +19,6 @@ import { Supplier } from "./suppliers.entity";
 @Index("essential_good_supplier_pkey", ["id"], { unique: true })
 @Entity("essential_good_supplier", { schema: "public" })
 export class EssentialGoodSupplier extends BaseModel {
-  @Column("varchar", { name: "name", nullable: false, length: 255 })
-  name: string;
-
   @Column({ name: "essential_good_id", type: "uuid", nullable: false })
   essentialGoodId: string;
 

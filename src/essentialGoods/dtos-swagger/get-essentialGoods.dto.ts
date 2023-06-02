@@ -1,7 +1,7 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
-import { GetCategoriesDto } from "../dtos";
+import { GetEssentialGoodsDto } from "../dtos";
 
-export class GetCategoriesRequestDto extends GetCategoriesDto {
+export class GetCategoriesRequestDto extends GetEssentialGoodsDto {
   @ApiPropertyOptional()
   page: number;
 

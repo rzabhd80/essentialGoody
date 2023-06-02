@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
-import { CategoriesService } from "./categories.service";
-import { CategoryController } from "./categoryController";
+import { EssentialGoodService } from "./essentialGood.service";
+import { EssentialGoodController } from "./essentialGoodController";
 import { CqrsModule } from "@nestjs/cqrs";
 import { commandsHandlers } from "./command/handler";
 import { queryHandlers } from "./query/handler";
@@ -9,7 +9,6 @@ import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { entities } from "../../libs/entities";
 import { HttpModule } from "@nestjs/axios";
-import { commandHandlers } from "../auth/commands/handler";
 
 @Module({
   imports: [
@@ -19,8 +18,8 @@ import { commandHandlers } from "../auth/commands/handler";
     ConfigModule,
     TypeOrmModule.forFeature(entities),
   ],
-  providers: [...commandHandlers, ...queryHandlers],
-  controllers: [CategoryController],
+  providers: [...commandsHandlers, ...queryHandlers],
+  controllers: [EssentialGoodController],
 })
-export class CategoriesModule {
+export class EssentialGoodModule {
 }

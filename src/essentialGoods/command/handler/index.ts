@@ -1,5 +1,5 @@
-import { CreateCategoryHandler } from "./create-category.handler";
-import { UpdateCategoryHandler } from "./update-category.handler";
-import { DeleteCategoryHandler } from "./delete-category.handler";
+import { CreateEssentialGoodHandler } from "./create-essentialGood.handler";
+import { UpdateEssentialGoodHandler } from "./update-essentialGood.handler";
+import { DeleteEssentialGoodHandler } from "./delete-essentialGood.handler";
 
-export const commandsHandlers = [CreateCategoryHandler, UpdateCategoryHandler, DeleteCategoryHandler];
+export const commandsHandlers = [CreateEssentialGoodHandler, UpdateEssentialGoodHandler, DeleteEssentialGoodHandler];

@@ -8,7 +8,7 @@ import { paginate } from "../../../../helpers/paginate";
 
 @Injectable()
 @QueryHandler(GetCategoriesQuery)
-export class GetCategoriesHandler implements IQueryHandler<GetCategoriesQuery> {
+export class GetEssentialGoodsHandler implements IQueryHandler<GetCategoriesQuery> {
   constructor(
     @InjectRepository(User) public readonly userRepo: Repository<User>,
   ) {

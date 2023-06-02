@@ -25,11 +25,8 @@ export class EssentialGood extends BaseModel {
   @Column("bigint", { name: "stock", nullable: false })
   stock: number;
 
-  @Column("uuid", { name: "category_id", nullable: false })
-  category_id: number;
-
   @Column({ name: "measurement_unit_id", type: "uuid", nullable: false })
-  measurementUnitId: number;
+  measurementUnitId: string;
 
   @ManyToOne(() => MeasurementUnitEntity,
     (measurementUnit) => measurementUnit.essentialGoods)

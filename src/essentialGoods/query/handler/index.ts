@@ -1,4 +1,4 @@
-import { GetCategoriesHandler } from "./get-categories.handler";
-import { GetCategoryByIdHandler } from "./get-category-by-id.handler";
+import { GetEssentialGoodsHandler } from "./get-essentialGoods.handler";
+import { GetEssentialGoodByIdHandler } from "./get-essentialGood-by-id.handler";
 
-export const queryHandlers = [GetCategoriesHandler, GetCategoryByIdHandler];
+export const queryHandlers = [GetEssentialGoodsHandler, GetEssentialGoodByIdHandler];

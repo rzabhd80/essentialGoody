@@ -1,5 +1,5 @@
-import { CreateCategoryCommand } from "./create-category.imple";
-import { UpdateCategoryCommand } from "./update-category.imple";
-import { DeleteCategoryCommand } from "./delete-category.imple";
+import { CreateEssentialGoodCommand } from "./create-essentialGood.imple";
+import { UpdateEssentialGoodCommand } from "./update-essentialGood.imple";
+import { DeleteEssentialGoodCommand } from "./delete-essentialGood.imple";
 
-export const commands = [CreateCategoryCommand, UpdateCategoryCommand, DeleteCategoryCommand];
+export const commands = [CreateEssentialGoodCommand, UpdateEssentialGoodCommand, DeleteEssentialGoodCommand];

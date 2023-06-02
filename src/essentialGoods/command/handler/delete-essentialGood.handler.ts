@@ -2,15 +2,15 @@ import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Inject, Injectable } from "@nestjs/common";
-import { CreateCategoryCommand } from "../impl/create-category.imple";
+import { CreateCategoryCommand } from "../impl/create-essentialGood.imple";
 import { CategoryEntity } from "libs/entities/category.entity";
 import { CATEGORY_NOT_FOUND, CustomError } from "http-exception";
-import { UpdateCategoryCommand } from "../impl/update-category.imple";
-import { DeleteCategoryCommand } from "../impl/delete-category.imple";
+import { UpdateCategoryCommand } from "../impl/update-essentialGood.imple";
+import { DeleteCategoryCommand } from "../impl/delete-essentialGood.imple";
 
 @Injectable()
 @CommandHandler(DeleteCategoryCommand)
-export class DeleteCategoryHandler implements ICommandHandler<DeleteCategoryCommand> {
+export class DeleteEssentialGoodHandler implements ICommandHandler<DeleteCategoryCommand> {
   constructor(
     @InjectRepository(CategoryEntity) public readonly categoryRepo: Repository<CategoryEntity>,
     public readonly eventPublisher: EventPublisher,

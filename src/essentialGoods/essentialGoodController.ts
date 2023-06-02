@@ -14,16 +14,16 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { AuthGuard } from "../../guards/adminGuard";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { GetCategoriesQuery } from "./query/impl/get-categories.query";
-import { CreateCategoryRequestDto} from "./dtos-swagger";
+import { CreateEssentialGoodRequestDto} from "./dtos-swagger";
 import { GetCategoryByIdQuery } from "./query/impl/get-category-by-id.query";
-import { CreateCategoryCommand} from "./command/impl/create-category.imple";
-import { UpdateCategoryRequestDto } from "./dtos-swagger/update-category-request.dto";
-import { UpdateCategoryCommand } from "./command/impl/update-category.imple";
-import { DeleteCategoryCommand } from "./command/impl/delete-category.imple";
+import { CreateCategoryCommand} from "./command/impl/create-essentialGood.imple";
+import { UpdateEssentialGoodRequestDto } from "./dtos-swagger/update-essentialGood-request.dto";
+import { UpdateCategoryCommand } from "./command/impl/update-essentialGood.imple";
+import { DeleteCategoryCommand } from "./command/impl/delete-essentialGood.imple";
 
 @Controller("categories")
 @ApiTags("categories")
-export class CategoryController {
+export class EssentialGoodController {
   constructor(private queryBus: QueryBus, private commandBus: CommandBus) {
   }
 
@@ -37,7 +37,7 @@ export class CategoryController {
 
   @Post()
   @ApiOperation({ description: "create a user" })
-  async createUser(@Body() body: CreateCategoryRequestDto) {
+  async createUser(@Body() body: CreateEssentialGoodRequestDto) {
     return this.commandBus.execute(new CreateCategoryCommand(body));
   }
 
@@ -55,7 +55,7 @@ export class CategoryController {
   async updateCategory(
     @Param("id", new ParseUUIDPipe({ version: "4" }))
       categoryId,
-    @Body() body: UpdateCategoryRequestDto,
+    @Body() body: UpdateEssentialGoodRequestDto,
   ) {
     return this.commandBus.execute(new UpdateCategoryCommand(body, categoryId));
   }

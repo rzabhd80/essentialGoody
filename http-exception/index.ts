@@ -20,6 +20,18 @@ export const USER_NOT_FOUND: ICustomError = {
   description: "user not found",
 };
 
+
+export const SUPPLIER_NOT_FOUND: ICustomError = {
+  status: HttpStatus.NOT_FOUND,
+  description: "supplier not found",
+};
+
+export const MEASUREMENT_UNIT_NOT_FOUND : ICustomError ={
+  status : HttpStatus.NOT_FOUND,
+  description : "measurement unit not found"
+}
+
+
 export const CATEGORY_NOT_FOUND: ICustomError = {
   status: HttpStatus.NOT_FOUND,
   description: "category with given id not found",
