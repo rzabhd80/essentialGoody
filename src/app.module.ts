@@ -16,6 +16,8 @@ import { CategoryEntity } from "../libs/entities/category.entity";
 import { MeasurementUnitEntity } from "../libs/entities/measurementUnit.entity";
 import { MeasurementUnitsModule } from "./measurementUnits/measurementUnits.module";
 import { CategoriesModule } from "./categories/categories.module";
+import { Supplier } from "../libs/entities/suppliers.entity";
+import { EssentialGoodSupplier } from "../libs/entities/EssentialGoodSupplier.entity";
 
 @Module({
   imports: [
@@ -36,7 +38,7 @@ import { CategoriesModule } from "./categories/categories.module";
           username: config.get<string>("POSTGRES_USER"),
           password: config.get<string>("POSTGRES_PASSWORD"),
           database: config.get<string>("POSTGRES_DATABASE"),
-          entities: [User, Avatar, EssentialGood, CategoryEntity, MeasurementUnitEntity],
+          entities: [User, Avatar, EssentialGood, CategoryEntity, MeasurementUnitEntity, Supplier, EssentialGoodSupplier],
         };
       },
     }),

@@ -4,7 +4,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  Index, JoinColumn, ManyToMany, ManyToOne,
+  Index, JoinColumn, ManyToMany, ManyToOne, OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -13,15 +13,14 @@ import { Avatar } from "./avatar.entity";
 import { BaseModel } from "libs/entities/baseModel";
 import { MeasurementUnitEntity } from "./measurementUnit.entity";
 import { CategoryEntity } from "./category.entity";
+import { EssentialGoodSupplier } from "./EssentialGoodSupplier.entity";
+import { Supplier } from "./suppliers.entity";
 
 @Index("essential_good_pkey", ["id"], { unique: true })
 @Entity("essential_good", { schema: "public" })
 export class EssentialGood extends BaseModel {
   @Column("varchar", { name: "name", nullable: false, length: 255 })
   name: string;
-
-  @Column({ name: "price", type: "money", nullable: false, length: 255 })
-  price: number;
 
   @Column("bigint", { name: "stock", nullable: false })
   stock: number;
@@ -40,4 +39,8 @@ export class EssentialGood extends BaseModel {
   @ManyToMany(() => CategoryEntity,
     (category) => category.essentialGoods)
   categories: CategoryEntity[];
+
+  @OneToMany(() => EssentialGoodSupplier,
+    (essentialGoodSupplier) => essentialGoodSupplier.essentialGood)
+  suppliers: Supplier[];
 }
