@@ -4,8 +4,4 @@ export class CreateSupplierDto {
   @IsString()
   @IsNotEmpty()
   name: string;
-
-  @IsOptional()
-  @IsUUID()
-  parentCategoryId: string;
 }

@@ -4,6 +4,4 @@ import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 export class CreateSupplierRequestDto extends CreateSupplierDto {
   @ApiProperty()
   name: string;
-  @ApiPropertyOptional()
-  parentCategoryId: string;
 }
