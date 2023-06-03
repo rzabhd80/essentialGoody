@@ -21,6 +21,7 @@ export class Supplier extends BaseModel {
   name: string;
 
   @OneToMany(() => EssentialGoodSupplier,
-    (essentialGoodSupplier) => essentialGoodSupplier.supplier)
+    (essentialGoodSupplier) => essentialGoodSupplier.supplier,
+    { onDelete: "CASCADE" })
   essentialGoods: EssentialGoodSupplier[];
 }

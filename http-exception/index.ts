@@ -37,6 +37,12 @@ export const CATEGORY_NOT_FOUND: ICustomError = {
   description: "category with given id not found",
 };
 
+export const ESSENTIAL_GOOD_NOT_FOUND: ICustomError = {
+  status: HttpStatus.NOT_FOUND,
+  description: "category with given id not found",
+};
+
+
 export const USER_AVATAR_NOT_FOUND: ICustomError = {
   status: HttpStatus.NOT_FOUND,
   description: "user avatar not found",

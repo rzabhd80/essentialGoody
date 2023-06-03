@@ -38,6 +38,6 @@ export class EssentialGood extends BaseModel {
   categories: CategoryEntity[];
 
   @OneToMany(() => EssentialGoodSupplier,
-    (essentialGoodSupplier) => essentialGoodSupplier.essentialGood)
+    (essentialGoodSupplier) => essentialGoodSupplier.essentialGood, { onDelete: "CASCADE" })
   suppliers: Supplier[];
 }
