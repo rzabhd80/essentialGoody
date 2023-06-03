@@ -1,5 +1,5 @@
 
-export class GetCategoriesQuery {
+export class GetSuppliersQuery {
   constructor(public readonly getCategoriesDto) {
   }
 }

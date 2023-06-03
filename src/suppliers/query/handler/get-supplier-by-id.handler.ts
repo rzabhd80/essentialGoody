@@ -1,23 +1,23 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
-import { GetEssentialGoodByIdQuery } from "../impl/get-essentialGood-by-id.query";
+import { GetSupplierByIdQuery } from "../impl/get-supplier-by-id.query";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "../../../../libs/entities/user.entity";
 import { Repository } from "typeorm";
-import { GetEssentialGoodsQuery } from "../impl/get-essentialGoods.query";
+import { GetSuppliersQuery } from "../impl/get-suppliers.query";
 import { CATEGORY_NOT_FOUND, CustomError, USER_NOT_FOUND } from "../../../../http-exception";
 import { firstValueFrom } from "rxjs";
 import { Inject } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { CategoryEntity } from "../../../../libs/entities/category.entity";
 
-@QueryHandler(GetEssentialGoodByIdQuery)
-export class GetEssentialGoodByIdHandler implements IQueryHandler<GetEssentialGoodByIdQuery> {
+@QueryHandler(GetSupplierByIdQuery)
+export class GetSupplierByIdHandler implements IQueryHandler<GetSupplierByIdQuery> {
   constructor(
     @InjectRepository(CategoryEntity) public readonly categoryRepo: Repository<CategoryEntity>,
   ) {
   }
 
-  async execute(query: GetEssentialGoodByIdQuery) {
+  async execute(query: GetSupplierByIdQuery) {
     const { categoryId } = query;
     const category = await this.categoryRepo.findOne({ where: { id: categoryId } });
     if (!category) {

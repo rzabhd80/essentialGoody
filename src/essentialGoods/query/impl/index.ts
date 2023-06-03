@@ -1,6 +1,6 @@
-import { GetCategoriesQuery } from "./get-categories.query";
-import { GetCategoryByIdQuery } from "./get-category-by-id.query";
+import { GetEssentialGoodsQuery } from "./get-essentialGoods.query";
+import { GetEssentialGoodByIdQuery } from "./get-essentialGood-by-id.query";
 export const queries = [
-  GetCategoriesQuery,
-  GetCategoryByIdQuery,
+  GetEssentialGoodsQuery,
+  GetEssentialGoodByIdQuery,
 ];
