@@ -1,3 +1,3 @@
 export class GetSupplierByIdQuery {
-  constructor(public readonly categoryId: string) {}
+  constructor(public readonly id: string) {}
 }

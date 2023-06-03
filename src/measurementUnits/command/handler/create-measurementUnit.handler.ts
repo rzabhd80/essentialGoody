@@ -5,7 +5,7 @@ import { Injectable } from "@nestjs/common";
 import { CreateMeasurementUnitCommand } from "../impl/create-measurementUnit.imple";
 import { CategoryEntity } from "libs/entities/category.entity";
 import { CATEGORY_NOT_FOUND, CustomError } from "http-exception";
-import { MeasurementUnitEntity } from "../../../../libs/entities/measurementUnit.entity";
+import { MeasurementUnitEntity } from "libs/entities/measurementUnit.entity";
 
 @Injectable()
 @CommandHandler(CreateMeasurementUnitCommand)

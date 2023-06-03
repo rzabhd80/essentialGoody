@@ -1,10 +1,10 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { GetMeasurementUnitsQuery } from "../impl/get-measurementUnits.query";
 import { InjectRepository } from "@nestjs/typeorm";
-import { User } from "../../../../libs/entities/user.entity";
+import { User } from "libs/entities/user.entity";
 import { Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";
-import { paginate } from "../../../../helpers/paginate";
+import { paginate } from "helpers/paginate";
 
 @Injectable()
 @QueryHandler(GetMeasurementUnitsQuery)

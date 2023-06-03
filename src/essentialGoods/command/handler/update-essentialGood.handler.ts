@@ -5,15 +5,15 @@ import { Inject, Injectable } from "@nestjs/common";
 import { CategoryEntity } from "libs/entities/category.entity";
 import {
   CATEGORY_NOT_FOUND,
-  CustomError,
+  CustomError, ESSENTIAL_GOOD_NOT_FOUND,
   MEASUREMENT_UNIT_NOT_FOUND,
   SUPPLIER_NOT_FOUND,
   USER_NOT_FOUND,
 } from "http-exception";
-import { Supplier } from "../../../../libs/entities/suppliers.entity";
-import { EssentialGood } from "../../../../libs/entities/essentialGood.entity";
-import { EssentialGoodSupplier } from "../../../../libs/entities/EssentialGoodSupplier.entity";
-import { MeasurementUnitEntity } from "../../../../libs/entities/measurementUnit.entity";
+import { Supplier } from "libs/entities/suppliers.entity";
+import { EssentialGood } from "libs/entities/essentialGood.entity";
+import { EssentialGoodSupplier } from "libs/entities/EssentialGoodSupplier.entity";
+import { MeasurementUnitEntity } from "libs/entities/measurementUnit.entity";
 import { UpdateEssentialGoodCommand } from "../impl/update-essentialGood.imple";
 
 @Injectable()
@@ -30,8 +30,15 @@ export class UpdateEssentialGoodHandler implements ICommandHandler<UpdateEssenti
   }
 
   async execute(command: UpdateEssentialGoodCommand) {
-    const { updateCategoryDto } = command;
+    const { updateCategoryDto, id } = command;
     const { name, price, supplierId, categoryIds, stock, measurementId, essentialGoodSupplierId } = updateCategoryDto;
+    const essentialGood = await this.essentialGoodRepo
+      .findOne({
+        where: { id },
+      });
+    if (!essentialGood) {
+      return new CustomError(ESSENTIAL_GOOD_NOT_FOUND);
+    }
     const supplier = await this.supplierRepo.findOne({ where: { id: supplierId } });
     const measurementUnit = await this.measurementUnitRepo.findOne({ where: { id: measurementId } });
     let categories: CategoryEntity[] = [];
@@ -60,11 +67,6 @@ export class UpdateEssentialGoodHandler implements ICommandHandler<UpdateEssenti
       }
       categories.push(category);
     }
-    const essentialGood = await this.essentialGoodRepo
-      .create({
-        name: name,
-        stock,
-      });
     await this.connection.transaction(async (manager) => {
       await manager.save<MeasurementUnitEntity>(measurementUnit);
       essentialGood.measurementUnitId = measurementUnit.id;
@@ -74,5 +76,6 @@ export class UpdateEssentialGoodHandler implements ICommandHandler<UpdateEssenti
       essentialGoodSupplier.essentialGood = essentialGood;
       await manager.save<EssentialGoodSupplier>(essentialGoodSupplier);
     });
+    return await this.essentialGoodRepo.findOne({ where: { id } });
   }
 }

@@ -1,14 +1,14 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { GetMeasurementUnitByIdQuery } from "../impl/get-measurementUnit-by-id.query";
 import { InjectRepository } from "@nestjs/typeorm";
-import { User } from "../../../../libs/entities/user.entity";
+import { User } from "libs/entities/user.entity";
 import { Repository } from "typeorm";
 import { GetMeasurementUnitsQuery } from "../impl/get-measurementUnits.query";
-import { CATEGORY_NOT_FOUND, CustomError, USER_NOT_FOUND } from "../../../../http-exception";
+import { CATEGORY_NOT_FOUND, CustomError, USER_NOT_FOUND } from "http-exception";
 import { firstValueFrom } from "rxjs";
 import { Inject } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
-import { CategoryEntity } from "../../../../libs/entities/category.entity";
+import { CategoryEntity } from "libs/entities/category.entity";
 
 @QueryHandler(GetMeasurementUnitByIdQuery)
 export class GetMeasurementUnitByIdHandler implements IQueryHandler<GetMeasurementUnitByIdQuery> {

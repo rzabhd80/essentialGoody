@@ -11,10 +11,10 @@ import {
   SUPPLIER_NOT_FOUND,
   USER_NOT_FOUND,
 } from "http-exception";
-import { Supplier } from "../../../../libs/entities/suppliers.entity";
-import { EssentialGood } from "../../../../libs/entities/essentialGood.entity";
-import { EssentialGoodSupplier } from "../../../../libs/entities/EssentialGoodSupplier.entity";
-import { MeasurementUnitEntity } from "../../../../libs/entities/measurementUnit.entity";
+import { Supplier } from "libs/entities/suppliers.entity";
+import { EssentialGood } from "libs/entities/essentialGood.entity";
+import { EssentialGoodSupplier } from "libs/entities/EssentialGoodSupplier.entity";
+import { MeasurementUnitEntity } from "libs/entities/measurementUnit.entity";
 
 @Injectable()
 @CommandHandler(CreateEssentialGoodCommand)
@@ -67,5 +67,6 @@ export class CreateEssentialGoodHandler implements ICommandHandler<CreateEssenti
       essentialGoodSupplier.essentialGood = essentialGood;
       await manager.save<EssentialGoodSupplier>(essentialGoodSupplier);
     });
+    return essentialGood;
   }
 }

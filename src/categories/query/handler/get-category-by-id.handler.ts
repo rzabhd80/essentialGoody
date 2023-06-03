@@ -23,5 +23,6 @@ export class GetCategoryByIdHandler implements IQueryHandler<GetCategoryByIdQuer
     if (!category) {
       return new CustomError(CATEGORY_NOT_FOUND);
     }
+    return category;
   }
 }

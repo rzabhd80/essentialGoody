@@ -6,7 +6,7 @@ import { CategoryEntity } from "libs/entities/category.entity";
 import { CATEGORY_NOT_FOUND, CustomError } from "http-exception";
 import { UpdateMeasurementUnitCommand } from "../impl/update-measurementUnit.imple";
 import { UpdateMeasurementUnitDto } from "../../dtos";
-import { MeasurementUnitEntity } from "../../../../libs/entities/measurementUnit.entity";
+import { MeasurementUnitEntity } from "libs/entities/measurementUnit.entity";
 
 @Injectable()
 @CommandHandler(UpdateMeasurementUnitCommand)

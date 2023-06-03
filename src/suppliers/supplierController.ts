@@ -16,10 +16,10 @@ import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { GetSuppliersQuery } from "./query/impl/get-suppliers.query";
 import { CreateSupplierRequestDto} from "./dtos-swagger";
 import { GetSupplierByIdQuery } from "./query/impl/get-supplier-by-id.query";
-import { CreateCategoryCommand} from "./command/impl/create-supplier.imple";
 import { UpdateSupplierRequestDto } from "./dtos-swagger/update-supplier-request.dto";
-import { UpdateCategoryCommand } from "./command/impl/update-supplier.imple";
-import { DeleteCategoryCommand } from "./command/impl/delete-supplier.imple";
+import { CreateSupplierCommand } from "./command/impl/create-supplier.imple";
+import { UpdateSupplierCommand } from "./command/impl/update-supplier.imple";
+import { DeleteSupplierCommand } from "./command/impl/delete-supplier.imple";
 
 @Controller("categories")
 @ApiTags("categories")
@@ -28,7 +28,7 @@ export class SupplierController {
   }
 
   @Get("/")
-  @ApiOperation({ description: "get list of categories" })
+  @ApiOperation({ description: "get list of suppliers" })
   async getUsers(@Query() getUsersRequest: GetSuppliersQuery) {
     return this.queryBus.execute<GetSuppliersQuery>(
       new GetSuppliersQuery(getUsersRequest),
@@ -36,9 +36,9 @@ export class SupplierController {
   }
 
   @Post()
-  @ApiOperation({ description: "create a user" })
+  @ApiOperation({ description: "create a supplier" })
   async createUser(@Body() body: CreateSupplierRequestDto) {
-    return this.commandBus.execute(new CreateCategoryCommand(body));
+    return this.commandBus.execute(new CreateSupplierCommand(body));
   }
 
   @Get("/:id")
@@ -51,13 +51,13 @@ export class SupplierController {
   }
 
   @Put("/:id")
-  @ApiOperation({ description: "update a category" })
+  @ApiOperation({ description: "update a supplier" })
   async updateCategory(
     @Param("id", new ParseUUIDPipe({ version: "4" }))
       categoryId,
     @Body() body: UpdateSupplierRequestDto,
   ) {
-    return this.commandBus.execute(new UpdateCategoryCommand(body, categoryId));
+    return this.commandBus.execute(new UpdateSupplierCommand(body, categoryId));
   }
 
   @Delete("/:id")
@@ -66,6 +66,6 @@ export class SupplierController {
     @Param("id", new ParseUUIDPipe({ version: "4" }))
       categoryId,
   ) {
-    return this.commandBus.execute(new DeleteCategoryCommand(categoryId));
+    return this.commandBus.execute(new DeleteSupplierCommand(categoryId));
   }
 }
