@@ -2,29 +2,27 @@ import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Inject, Injectable } from "@nestjs/common";
-import { CreateCategoryCommand } from "../impl/create-supplier.imple";
 import { CategoryEntity } from "libs/entities/category.entity";
-import { CATEGORY_NOT_FOUND, CustomError } from "http-exception";
-import { UpdateCategoryCommand } from "../impl/update-supplier.imple";
-import { DeleteCategoryCommand } from "../impl/delete-supplier.imple";
-
+import { CATEGORY_NOT_FOUND, CustomError, SUPPLIER_NOT_FOUND } from "http-exception";
+import { DeleteSupplierCommand } from "../impl/delete-supplier.imple";
+import { Supplier } from "../../../../libs/entities/suppliers.entity";
 @Injectable()
-@CommandHandler(DeleteCategoryCommand)
-export class DeleteSupplierHandler implements ICommandHandler<DeleteCategoryCommand> {
+@CommandHandler(DeleteSupplierCommand)
+export class DeleteSupplierHandler implements ICommandHandler<DeleteSupplierCommand> {
   constructor(
-    @InjectRepository(CategoryEntity) public readonly categoryRepo: Repository<CategoryEntity>,
+    @InjectRepository(Supplier) public readonly supplierRepo: Repository<Supplier>,
     public readonly eventPublisher: EventPublisher,
   ) {
   }
 
-  async execute(command: DeleteCategoryCommand) {
+  async execute(command: DeleteSupplierCommand) {
     const { id } = command;
-    const category = await this.categoryRepo.findOne({ where: { id: id } });
-    if (!category) {
-      return new CustomError(CATEGORY_NOT_FOUND);
+    const supplier = await this.supplierRepo.findOne({ where: { id: id } });
+    if (!supplier) {
+      return new CustomError(SUPPLIER_NOT_FOUND);
     }
 
-    await category.softRemove();
-    return await category.save();
+    await supplier.softRemove();
+    return await supplier.save();
   }
 }

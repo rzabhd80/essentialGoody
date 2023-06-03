@@ -1,5 +1,5 @@
-import { CreateCategoryCommand } from "./create-supplier.imple";
-import { UpdateCategoryCommand } from "./update-supplier.imple";
-import { DeleteCategoryCommand } from "./delete-supplier.imple";
+import { CreateSupplierCommand } from "./create-supplier.imple";
+import { UpdateSupplierCommand } from "./update-supplier.imple";
+import {DeleteSupplierCommand } from "./delete-supplier.imple";
 
-export const commands = [CreateCategoryCommand, UpdateCategoryCommand, DeleteCategoryCommand];
+export const commands = [CreateSupplierCommand, UpdateSupplierCommand, DeleteSupplierCommand];

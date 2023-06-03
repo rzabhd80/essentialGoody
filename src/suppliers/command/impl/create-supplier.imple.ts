@@ -1,4 +1,4 @@
 import { CreateSupplierDto } from "../../dtos";
-export class CreateCategoryCommand {
+export class CreateSupplierCommand {
   constructor(public readonly createCategoryDto: CreateSupplierDto) {}
 }

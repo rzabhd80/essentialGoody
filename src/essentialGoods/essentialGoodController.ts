@@ -21,8 +21,8 @@ import { GetEssentialGoodByIdQuery } from "./query/impl/get-essentialGood-by-id.
 import { UpdateEssentialGoodCommand } from "./command/impl/update-essentialGood.imple";
 import { DeleteEssentialGoodCommand } from "./command/impl/delete-essentialGood.imple";
 
-@Controller("categories")
-@ApiTags("categories")
+@Controller("suppliers")
+@ApiTags("suppliers")
 export class EssentialGoodController {
   constructor(private queryBus: QueryBus, private commandBus: CommandBus) {
   }

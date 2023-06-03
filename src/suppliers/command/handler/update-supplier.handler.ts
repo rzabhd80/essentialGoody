@@ -2,33 +2,29 @@ import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Inject, Injectable } from "@nestjs/common";
-import { CreateCategoryCommand } from "../impl/create-supplier.imple";
 import { CategoryEntity } from "libs/entities/category.entity";
 import { CATEGORY_NOT_FOUND, CustomError } from "http-exception";
-import { UpdateCategoryCommand } from "../impl/update-supplier.imple";
+import { UpdateSupplierCommand } from "../impl/update-supplier.imple";
+import { Supplier } from "../../../../libs/entities/suppliers.entity";
 
 @Injectable()
-@CommandHandler(UpdateCategoryCommand)
-export class UpdateSupplierHandler implements ICommandHandler<UpdateCategoryCommand> {
+@CommandHandler(UpdateSupplierCommand)
+export class UpdateSupplierHandler implements ICommandHandler<UpdateSupplierCommand> {
   constructor(
-    @InjectRepository(CategoryEntity) public readonly categoryRepo: Repository<CategoryEntity>,
+    @InjectRepository(Supplier) public readonly supplierRepo: Repository<Supplier>,
     public readonly eventPublisher: EventPublisher,
   ) {
   }
 
-  async execute(command: UpdateCategoryCommand) {
-    const { updateCategoryDto, id } = command;
-    const { name, parentCategoryId } = updateCategoryDto;
-    const parentCategory = await this.categoryRepo.findOne({ where: { id: parentCategoryId } });
-    if (!parentCategory) {
+  async execute(command: UpdateSupplierCommand) {
+    const { id, updateCategoryDto } = command;
+    const { name } = updateCategoryDto;
+    const supplier = await this.supplierRepo.findOne({ where: { id: id } });
+    if (!supplier) {
       return new CustomError(CATEGORY_NOT_FOUND);
     }
-    const category = await this.categoryRepo.findOne({ where: { id: id } });
-    if (!category) {
-      return new CustomError(CATEGORY_NOT_FOUND);
-    }
-    Object.assign(category, { name: name, parentCategoryId: parentCategoryId });
-    await category.save();
-    return category;
+    Object.assign(supplier, { name: name });
+    await supplier.save();
+    return supplier;
   }
 }

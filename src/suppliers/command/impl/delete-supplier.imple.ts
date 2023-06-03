@@ -1,6 +1,6 @@
 import { UpdateSupplierDto } from "../../dtos";
 
-export class DeleteCategoryCommand {
+export class DeleteSupplierCommand {
   constructor(public readonly id) {
   }
 }
